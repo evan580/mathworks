@@ -1,71 +1,115 @@
 import requests
 import json
-
-url = 'https://matlab.mathworks.com'
-
-def create_header(header):
-	header['Accept'] = 'application/json'
-	header['Accept-Encoding'] = 'gzip, deflate'
-	header['Accept-Language'] = 'en-US,en;q=0.9,he;q=0.8'
-	header['Connection'] = 'keep-alive'
-	header['Content-Type'] = 'application/json'
-
-	# header = open('requests.header')
-	# return header
-
-header = {}
-create_header(header)
-
-def create_body(body):
-	body["mwtype"] = "authnz/PasswordLogin"
-	body["subjectId"] = "gstubbs"
-	body["password"] = "matlab"
+import random
 
 
-body = {}
-create_body(body)
+# def send_request(body_file_path, api):
+# 	body = json.load(open(baseDir_requests + body_file_path))
+# 	response = session.post(url+api, json=body, headers=header)
+# 	return response
 
 
 def authentication():
-	pass
+	body = json.load(open(baseDir_requests + "/authentication.json"))
+	response = requests.post(url+"/hello", json=body, headers=header)
+	# response = send_request('/authentication.json', "/hello")
+	print(response.text)
 
 def acquire():
-	pass
+	body = json.load(open(baseDir_requests + "/acquire.json"))
+	response = requests.post(url+"/hello", json=body, headers=header)
+	# response = send_request('/acquire.json', "/hello"
+	session_attributes["resourceToken"] = "1"
+	print(response.text)
+	return response["resourceToken"]
 
 def createMapping():
-	pass
+	body = json.load(open(baseDir_requests + "/gateway.json"))
+	body["resourceToken"] = session_attributes["resourceToken"]
+	response = requests.post(url+"/hello", json=body, headers=header)
+	# response = send_request('/gateway.json', "/hello")
+	print(response.text)
+	return response["mappingToken"]
 
 def setMappingCookie():
-	pass
+	cookies = dict(cookies_are='working')
+	response = requests.post(url+"/hello", headers=header)
+	print(response.text)
 
 def setClientType():
-	pass
+	body = json.load(open(baseDir_requests + "/clientType.json"))
+	response = requests.post(url+"/hello", json=body, headers=header)
+	print(response.text)
+	return response["clientId"]
 
 def getRandomId():
-	pass
+	return random.randrange(1000)
 
 def handshake():
-	pass
+	body = json.load(open(baseDir_requests + "/longPollHandshake.json"))
+	body["id"] = randomId
+	response = requests.post(url+"/hello", json=body, headers=header)
+	print(response.text)
 
 def subscribe():
-	pass
+	body = json.load(open(baseDir_requests + "/subscribe.json"))
+	body["id"] = randomId
+	body["clientId"] = clientId
+	response = requests.post(url+"/hello", json=body, headers=header)
+	print(response.text)
 
 def connect():
-	pass
+	body = json.load(open(baseDir_requests + "/longPollConnect.json"))
+	body["id"] = randomId
+	body["clientId"] = clientId
+	response = requests.post(url+"/hello", json=body, headers=header)
+	print(response.text)
 
 def sendEval():
-	pass
+	body = json.load(open(baseDir_requests + "/asyncEval.json"))
+	body["id"] = randomId
+	body["clientId"] = clientId
+	response = requests.post(url+"/hello", json=body, headers=header)
+	print(response.text)
 
 def checkCompletionStatus():
-	pass
+	body = json.load(open(baseDir_requests + "/longPollConnect.json"))
+	body["id"] = randomId
+	body["clientId"] = clientId
+	response = requests.post(url+"/hello", json=body, headers=header)
+	print(response.text)
 
 def destroyMapping():
-	pass
+	body = json.load(open(baseDir_requests + "/destroy_gateway_mapping.json"))
+	body["mappingToken"] = mappingToken
+	response = requests.post(url+"/hello", json=body, headers=header)
+	print(response.text)
 
 def releaseMATLAB():
-	pass
+	body = json.load(open(baseDir_requests + "/releaseMATLAB.json"))
+	body["resourceToken"] = resourceToken
+	response = requests.post(url+"/hello", json=body, headers=header)
+	print(response.text)
 
 
-x = requests.post(url+"/service/core/authnz", json=body, headers=header)
+url = 'http://localhost:5000'
+baseDir_requests = './resources/requests'
 
-print(x.text)
+session = requests.Session()
+header = json.load(open(baseDir_requests + '/header.json'))
+# session_attributes = {}
+
+if __name__ == "__main__":
+	authentication()
+	resourceToken = acquire()
+	mappingToken = createMapping()
+	setMappingCookie()
+	clientId = setClientType()
+	randomId = str(getRandomId())
+	handshake()
+	subscribe()
+	connect()
+	sendEval()
+	checkCompletionStatus()
+	destroyMapping()
+	releaseMATLAB()

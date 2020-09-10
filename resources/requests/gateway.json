@@ -1,0 +1,4 @@
+{
+	"mwtype": "gateway/CreateMapping",
+	"resourceToken": "${resourceToken}"
+}

@@ -1,0 +1,10 @@
+{
+	"mwtype": "resource/Acquire",
+	"specification": {
+		"type": "matlab",
+		"matchLabels": {
+			"supportsMatlabOnline": "true"
+		}
+	},
+	"configuration": {}
+}

@@ -1,0 +1,4 @@
+{
+      "mwtype": "gateway/DestroyMapping",
+      "mappingToken": "${mappingToken}"
+}

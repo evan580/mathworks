@@ -1,0 +1,9 @@
+[{
+	"channel": "/meta/connect",
+	"connectionType": "long-polling",
+	"advice": {
+		"timeout": 0
+	},
+	"id": "${randomId}",
+	"clientId": "${clientId}"
+}]

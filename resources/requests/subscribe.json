@@ -1,0 +1,6 @@
+[{
+	"channel": "/meta/subscribe",
+	"subscription": "/matlab/eval/response/completion",
+	"id": "${randomId}",
+	"clientId": "${clientId}"
+}]
