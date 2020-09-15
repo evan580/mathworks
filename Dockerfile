@@ -9,6 +9,8 @@ RUN pip install -r requirements.txt
 
 COPY example_image.py .
 
+COPY resources ./resources
+
 VOLUME /code
 
 CMD ["python", "./example_image.py"]

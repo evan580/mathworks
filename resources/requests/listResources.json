@@ -1,0 +1,10 @@
+{
+  "mwtype": "resource/ListResources",
+  "specification": {
+    "type": "matlab",
+    "matchLabels": {
+      "supportsMatlabOnline": "true"
+    }
+  },
+  "configuration": {}
+}

@@ -1,6 +1,7 @@
 {
 	"mwtype": "resource/Acquire",
 	"specification": {
+		"resourceDefinitionId": "mathworks-matlab-pool",
 		"type": "matlab",
 		"matchLabels": {
 			"supportsMatlabOnline": "true"

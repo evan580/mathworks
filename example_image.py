@@ -2,13 +2,9 @@ import requests
 import json
 import time
 
-response = requests.get("http://www.google.com")
+response = requests.get("https://www.google.com")
 # domain = response.headers["domain"]
-date = response.headers["Date"]
+data = response.headers
 
-f = open("./result.txt", "a+")
-f.write(date + "\n")
-f.close()
-
-print("pausing...")
+print(data)
 time.sleep(60)

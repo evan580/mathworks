@@ -1,6 +1,6 @@
 [{
 	"channel": "/matlab/eval/request",
-	"data": "x=1;",
+	"data": "x=1;disp(x)",
 	"id": "${randomId}",
 	"clientId": "${clientId}"
 }]
